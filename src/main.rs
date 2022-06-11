@@ -1,7 +1,11 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use log::debug;
-use std::{collections::HashSet, fs};
+use std::{
+    collections::HashSet,
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
 use dedup::Cli;
 
@@ -13,17 +17,18 @@ fn main() -> Result<()> {
         .init();
 
     debug!("{:?}", &args);
-    let content = match &args.input {
-        Some(path) => fs::read_to_string(path)
-            .with_context(|| format!("Failed to read file `{}`", path.display()))?,
+    let file = match &args.input {
+        Some(path) => {
+            File::open(path).with_context(|| format!("Failed to open file `{}`", path.display()))?
+        }
         None => return Err(anyhow::anyhow!("No input file specified")),
     };
 
-    debug!("Content of input:\n{}", content);
-
+    let reader = BufReader::new(file);
     let mut cache = HashSet::new();
-    for line in content.lines() {
-        if cache.contains(line) {
+    for line in reader.lines().into_iter() {
+        let line = line.with_context(|| "Failed to read line")?;
+        if cache.contains(&line) {
             continue;
         }
         println!("{}", line);
