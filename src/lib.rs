@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{collections::HashSet, path::PathBuf};
 
 use clap::Parser;
 
@@ -16,3 +16,5 @@ pub struct Cli {
     #[clap(flatten)]
     pub verbose: clap_verbosity_flag::Verbosity,
 }
+
+pub mod cache;

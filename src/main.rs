@@ -2,12 +2,12 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use log::debug;
 use std::{
-    collections::HashSet,
     fs::File,
     io::{BufRead, BufReader},
 };
 
 use dedup::Cli;
+use dedup::cache::Cache;
 
 fn main() -> Result<()> {
     let args = Cli::parse();
@@ -25,7 +25,7 @@ fn main() -> Result<()> {
     };
 
     let reader = BufReader::new(file);
-    let mut cache = HashSet::new();
+    let mut cache = Cache::new();
     for line in reader.lines().into_iter() {
         let line = line.with_context(|| "Failed to read line")?;
         if cache.contains(&line) {
