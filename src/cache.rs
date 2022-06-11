@@ -17,11 +17,11 @@ where
         }
     }
 
-		pub fn insert(&mut self, item: T) -> bool {
-				self.cache.insert(item)
-		}
+    pub fn insert(&mut self, item: T) -> bool {
+        self.cache.insert(item)
+    }
 
-		pub fn contains(&self, item: &T) -> bool {
-				self.cache.contains(item)
-		}
+    pub fn contains(&self, item: &T) -> bool {
+        self.cache.contains(item)
+    }
 }
