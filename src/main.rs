@@ -35,16 +35,14 @@ fn main() -> Result<()> {
         None => Box::new(stdout().lock()),
     };
 
-    let mut cache = Cache::new();
+    let mut cache = Cache::new(args.memo_limit);
     for line in input.lines().into_iter() {
         let line = line.with_context(|| "Failed to read line")?;
-        if cache.contains(&line) {
-            continue;
+        if cache.insert(&line) {
+            output
+                .write_fmt(format_args!("{}\n", &line))
+                .with_context(|| "Failed to write line")?;
         }
-        output
-            .write_fmt(format_args!("{}\n", &line))
-            .with_context(|| "Failed to write line")?;
-        cache.insert(line);
     }
 
     Ok(())

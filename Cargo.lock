@@ -104,6 +104,7 @@ dependencies = [
  "clap-verbosity-flag",
  "env_logger",
  "log",
+ "odht",
 ]
 
 [[package]]
@@ -182,6 +183,15 @@ name = "memchr"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
+
+[[package]]
+name = "odht"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a518809ac14b25b569624d0268eba1e88498f71615893dca57982bed7621abb"
+dependencies = [
+ "cfg-if",
+]
 
 [[package]]
 name = "os_str_bytes"

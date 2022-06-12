@@ -12,6 +12,10 @@ pub struct Cli {
     /// Output file name
     pub output: Option<PathBuf>,
 
+    /// Memory limit in bytes, 0 for unlimited
+    #[clap(short, long, default_value_t = 0)]
+    pub memo_limit: usize,
+
     /// Whether to print verbose output
     #[clap(flatten)]
     pub verbose: clap_verbosity_flag::Verbosity,
