@@ -6,8 +6,8 @@ use std::{
     io::{stdin, stdout, BufRead, BufReader, BufWriter, Write},
 };
 
-use dedup::cache::Cache;
-use dedup::Cli;
+use dedup_it::cache::Cache;
+use dedup_it::Cli;
 
 fn main() -> Result<()> {
     let args = Cli::parse();

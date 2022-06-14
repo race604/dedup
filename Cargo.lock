@@ -96,7 +96,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "dedup"
+name = "dedup-it"
 version = "0.1.0"
 dependencies = [
  "anyhow",
